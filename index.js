@@ -18,13 +18,16 @@ board.on("ready", function() {
 	});
 	*/
 	photoSensor.on("data", function(){
-		var measurement = this.value;
-		console.log("Current value of the light sensor is " + measurement + ".");
-		request.post(
-			     'http://iotbe-njugbe.herokuapp.com/sensor/0/measurements'
-			     , {value: measurement}
+		var measurement = new Object();
+		measurement.value = this.value;
+		//console.log("Current value of the light sensor is " + measurement.value + ".");
+
+		var post_options = new Object();
+		post_options.url = 'http://iotbe-njugbe.herokuapp.com/sensor/0/measurement';
+		post_options.json = measurement;
+		request.post(post_options
 			     , function(error, response, body){
-				 if(!error && response.statusCode == 200){
+				 if(error && response.statusCode != 200){
 				     console.log(body);
 				 }
 			     }

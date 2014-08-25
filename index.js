@@ -4,6 +4,8 @@ var five = require("johnny-five")
 var request = require('request');
 
 board.on("ready", function() {
+
+	var led = new five.Led(13).strobe(2000);
 	// https://github.com/rwaldron/johnny-five/wiki/Sensor
 	var photoSensor = new five.Sensor("A0"); // use default options
 	
@@ -31,7 +33,7 @@ board.on("ready", function() {
 				     console.log(body);
 				 }
 			     }
-);
+			     );
 	});
 
 
